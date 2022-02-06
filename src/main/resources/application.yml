@@ -1,6 +1,6 @@
 # Server Configuration
 server:
-  port: 9999
+  port: 9998
   error:
     include-stacktrace: always
   compression:
