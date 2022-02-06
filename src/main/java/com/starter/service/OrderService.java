@@ -8,5 +8,7 @@ import java.util.Optional;
 
 public interface OrderService {
 
+    List<Order> findAll();
+
     void saveOrder(Order order);
 }

@@ -24,5 +24,4 @@ public class OrderDTO {
         order.setTotalPrice(totalPrice);
         return order;
     }
-
 }

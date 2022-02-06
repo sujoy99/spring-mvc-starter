@@ -6,6 +6,7 @@ import com.starter.entity.Order;
 import com.starter.entity.Pizza;
 import com.starter.entity.Toppings;
 import com.starter.helper.OrderHelper;
+import com.starter.response.OrderResponse;
 import com.starter.service.OrderService;
 import com.starter.service.PizzaService;
 import com.starter.service.ToppingsService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,11 +31,15 @@ public class OrderResource {
     @GetMapping("/")
     public String homePage(Model model) {
 
+        List<Pizza> pizzas = pizzaService.findAll();
+        model.addAttribute("pizzas", pizzas);
+
         List<Toppings> toppings = toppingsService.findAll();
         model.addAttribute("toppings", toppings);
 
-        List<Pizza> pizzas = pizzaService.findAll();
-        model.addAttribute("pizzas", pizzas);
+        List<Order> orders = orderService.findAll();
+        List<OrderResponse> orderResponses = orders.stream().map(OrderResponse::response).collect(Collectors.toList());
+        model.addAttribute("orders", orderResponses);
 
         OrderDTO orderDTO = new OrderDTO();
         model.addAttribute("orderDTO", orderDTO);

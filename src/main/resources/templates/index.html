@@ -36,17 +36,17 @@
 
   <div class="row">
 
-    <div class="col-6 bottom_margin" th:each="pizza: ${pizzas}">
+    <div class="col-6 bottom_margin" th:each="order: ${orders}">
       <div class="card ">
         <div class="card-header">
 
-          <h4 class="d-inline">Pizza Name :</h4> <label th:text="${pizza.pizzaName}"></label>
-<!--          <b class="float-right" th:text="${pizza.pizzaStatus}"></b>-->
+          <h4 class="d-inline">Pizza Name :</h4> <label th:text="${order.pizzaName}"></label>
+          <b class="float-right" th:text="${order.orderStatus}"></b>
         </div>
         <div class="card-body">
-          <h4 class="d-inline">Pizza Price :</h4> <b th:text=" ${pizza.pizzaPrice} + &#2547;"></b>
+          <h4 class="d-inline">Pizza Price :</h4> <b th:text=" ${order.totalPrice} + &#2547;"></b>
 
-          <input type="text" hidden class="form-control" id = "id" th:value="${pizza.pizzaId}" >
+          <input type="text" hidden class="form-control" id = "id" th:value="${order.orderId}" >
           <button type="button" class="btn btn-primary float-right edit"  data-toggle="modal" data-target="#editForm">
             Edit
           </button>
