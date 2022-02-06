@@ -1,6 +1,5 @@
 package com.starter.entity;
 
-import com.starter.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,21 +9,22 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "TBL_PIZZA")
+@Table(name = "TBL_ORDER_DETAIL")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Pizza {
+public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PIZZA_ID")
-    private Long pizzaId;
+    @Column(name = "ORDER_DETAIL_ID")
+    private Long orderDetailId;
 
-    @Column(name = "PIZZA_NAME")
-    private String pizzaName;
+    @OneToOne
+    @JoinColumn(name = "PIZZA_ID", nullable = false)
+    private Pizza pizza;
 
-    @Column(name = "PIZZA_PRICE", columnDefinition = "Decimal(10,2) default '1000.00'")
-    private Double pizzaPrice;
-
+    @OneToOne
+    @JoinColumn(name = "TOPPINGS_ID", nullable = false)
+    private Toppings toppings;
 }

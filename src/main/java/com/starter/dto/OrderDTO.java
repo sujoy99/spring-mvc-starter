@@ -22,7 +22,7 @@ public class OrderDTO {
         pizza.setPizzaId(pizzaId);
         pizza.setPizzaName(pizzaName);
         pizza.setPizzaPrice(pizzaPrice);
-        pizza.setPizzaStatus(status);
+//        pizza.setPizzaStatus(status);
         return pizza;
     }
 

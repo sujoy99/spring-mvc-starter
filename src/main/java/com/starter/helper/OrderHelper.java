@@ -15,6 +15,6 @@ public class OrderHelper {
 
     public void getToppings(OrderDTO orderDTO, Pizza pizza){
         Toppings toppings = toppingsService.findById(orderDTO.getToppingId()).get();
-        pizza.setToppings(toppings);
+//        pizza.setToppings(toppings);
     }
 }
