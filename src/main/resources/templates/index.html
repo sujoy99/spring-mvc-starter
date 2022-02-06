@@ -75,7 +75,7 @@
           <!--          pizza dropdown-->
           <div class="form-group">
             <label>Pizza</label>
-            <select class="form-control base_pizza_price" name="pizzaId" id="pizzaId">
+            <select class="form-control base_pizza_price" name="pizzaId" id="pizzaId" required>
               <option value="0">Choose option</option>
               <option th:each="pizza: ${pizzas}" th:value="${pizza.pizzaId}" th:text="${pizza.pizzaName}"></option>
             </select>
@@ -91,11 +91,11 @@
           </div>
           <div class="form-group">
             <label>Total Price :</label>
-            <input type="text" readonly class="form-control prices" id="prices" th:value="*{pizzaPrice}">
+            <input type="text" readonly class="form-control prices" id="prices" th:value="*{totalPrice}">
             <input type="text" class="form-control pizzaPriceBase" id="pizzaPriceBase">
             <input type="text" class="form-control toppingPrice" id="toppingPrice">
-            <input type="text" class="form-control pizzaPriceHidden" name="pizzaPrice" id="pizzaPriceHidden">
-            <input type="text" readonly class="form-control pizzaPrice" id="pizzaPrice" th:value="*{pizzaPrice}">
+            <input type="text" class="form-control pizzaPriceHidden" name="totalPrice" id="pizzaPriceHidden">
+            <input type="text" readonly class="form-control pizzaPrice" id="pizzaPrice" th:value="*{totalPrice}">
           </div>
         </div>
         <div class="modal-footer border-top-0 d-flex justify-content-center">

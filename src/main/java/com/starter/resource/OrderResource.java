@@ -2,9 +2,11 @@ package com.starter.resource;
 
 
 import com.starter.dto.OrderDTO;
+import com.starter.entity.Order;
 import com.starter.entity.Pizza;
 import com.starter.entity.Toppings;
 import com.starter.helper.OrderHelper;
+import com.starter.service.OrderService;
 import com.starter.service.PizzaService;
 import com.starter.service.ToppingsService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class OrderResource {
 
     private final ToppingsService toppingsService;
     private final PizzaService pizzaService;
+    private final OrderService orderService;
     private final OrderHelper orderHelper;
 
     @GetMapping("/")
@@ -41,22 +44,21 @@ public class OrderResource {
     @PostMapping("/save-pizza")
     public String savePizza(OrderDTO orderDTO) {
 
-        System.out.println(orderDTO);
-
-        Pizza pizza = orderDTO.toEntity();
-        orderHelper.getToppings(orderDTO, pizza);
-        pizzaService.savePizza(pizza);
+        Order order = orderDTO.toEntity();
+        orderHelper.setOrderDetails(orderDTO, order);
+        orderService.saveOrder(order);
 
         return "redirect:/";
     }
 
+    /*
     @PostMapping("/edit-pizza")
     public String editPizza(OrderDTO orderDTO) {
 
-        Pizza pizza = orderDTO.toEntity();
+        Order order = orderDTO.toEntity();
         orderHelper.getToppings(orderDTO, pizza);
         pizzaService.savePizza(pizza);
 
         return "redirect:/";
-    }
+    }*/
 }
