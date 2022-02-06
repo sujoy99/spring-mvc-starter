@@ -41,7 +41,7 @@
         <div class="card-header">
 
           <h4 class="d-inline">Pizza Name :</h4> <label th:text="${pizza.pizzaName}"></label>
-          <b class="float-right" th:text="${pizza.pizzaStatus}"></b>
+<!--          <b class="float-right" th:text="${pizza.pizzaStatus}"></b>-->
         </div>
         <div class="card-body">
           <h4 class="d-inline">Pizza Price :</h4> <b th:text=" ${pizza.pizzaPrice} + &#2547;"></b>
@@ -69,23 +69,32 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="#" th:action="@{/save-pizza}" th:object="${orderDTO}">
+      <form method="post" action="#" th:action="@{/save-pizza}" th:object="${orderDTO}" multiple>
         <div class="modal-body">
+
+          <!--          pizza dropdown-->
           <div class="form-group">
-            <label >Pizza Name</label>
-            <input type="text" class="form-control" name="pizzaName" id="pizzaName" aria-describedby="emailHelp" placeholder="Enter name">
+            <label>Pizza</label>
+            <select class="form-control base_pizza_price" name="pizzaId" id="pizzaId">
+              <option value="0">Choose option</option>
+              <option th:each="pizza: ${pizzas}" th:value="${pizza.pizzaId}" th:text="${pizza.pizzaName}"></option>
+            </select>
           </div>
+
           <div class="form-group">
             <label >Toppings</label>
-            <select class="form-control activity" name="toppingId" id="toppingId">
+            <select class="form-control activity" name="toppingsId" id="toppingId" required multiple>
               <option value="0">Choose option</option>
-              <option th:each="topping: ${toppings}"  th:value="${topping.toppingsId}"  th:text="${topping.toppingsName}"></option>
+              <option th:each="topping: ${toppings}" th:value="${topping.toppingsId}"
+                      th:text="${topping.toppingsName}"></option>
             </select>
           </div>
           <div class="form-group">
-            <label >Total Price :</label>
-            <input type="text" hidden readonly class="form-control prices" id="prices" th:value="*{pizzaPrice}">
-            <input type="text" hidden  class="form-control pizzaPriceHidden"name="pizzaPrice" id="pizzaPriceHidden" >
+            <label>Total Price :</label>
+            <input type="text" readonly class="form-control prices" id="prices" th:value="*{pizzaPrice}">
+            <input type="text" class="form-control pizzaPriceBase" id="pizzaPriceBase">
+            <input type="text" class="form-control toppingPrice" id="toppingPrice">
+            <input type="text" class="form-control pizzaPriceHidden" name="pizzaPrice" id="pizzaPriceHidden">
             <input type="text" readonly class="form-control pizzaPrice" id="pizzaPrice" th:value="*{pizzaPrice}">
           </div>
         </div>
@@ -98,44 +107,44 @@
 </div>
 
 <!--edit pizza-->
-<div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel1">Edit Pizza</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form method="post" action="#" th:action="@{/edit-pizza}" th:object="${orderDTO}">
-        <div class="modal-body">
-          <div class="form-group">
-            <label >Pizza Name</label>
+<!--<div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header border-bottom-0">-->
+<!--        <h5 class="modal-title" id="exampleModalLabel1">Edit Pizza</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <form method="post" action="#" th:action="@{/edit-pizza}" th:object="${orderDTO}">-->
+<!--        <div class="modal-body">-->
+<!--          <div class="form-group">-->
+<!--            <label >Pizza Name</label>-->
 
-            <input type="text" class="form-control" hidden name="pizzaId" id="pizzaId"  aria-describedby="emailHelp" placeholder="Enter name">
-            <input type="text" readonly class="form-control" name="pizzaName" id="pizzaNameValue"  aria-describedby="emailHelp" placeholder="Enter name">
-          </div>
-          <div class="form-group">
-            <label >Toppings</label>
-            <select class="form-control activity" name="toppingId" id="toppingIdValue" >
-              <option value="0">Choose option</option>
-              <option th:each="topping: ${toppings}"  th:value="${topping.toppingsId}"   th:text="${topping.toppingsName}"></option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label >Total Price :</label>
-            <input type="text" hidden readonly class="form-control prices"  th:value="*{pizzaPrice}">
-            <input type="text" hidden class="form-control " name="pizzaPrice" id="pizzaPriceEdit" >
-            <input type="text" readonly class="form-control " id="pizzaPriceValue" >
-          </div>
-        </div>
-        <div class="modal-footer border-top-0 d-flex justify-content-center">
-          <button type="submit" class="btn btn-success">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+<!--            <input type="text" class="form-control"  name="orderId" id="orderId"  aria-describedby="emailHelp" placeholder="Enter name">-->
+<!--            <input type="text" readonly class="form-control" name="pizzaName" id="pizzaNameValue"  aria-describedby="emailHelp" placeholder="Enter name">-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label >Toppings</label>-->
+<!--            <select class="form-control activity" name="toppingId" id="toppingIdValue" >-->
+<!--              <option value="0">Choose option</option>-->
+<!--              <option th:each="topping: ${toppings}"  th:value="${topping.toppingsId}"   th:text="${topping.toppingsName}"></option>-->
+<!--            </select>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label >Total Price :</label>-->
+<!--            <input type="text" hidden readonly class="form-control prices"  th:value="*{pizzaPrice}">-->
+<!--            <input type="text" hidden class="form-control " name="pizzaPrice" id="pizzaPriceEdit" >-->
+<!--            <input type="text" readonly class="form-control " id="pizzaPriceValue" >-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal-footer border-top-0 d-flex justify-content-center">-->
+<!--          <button type="submit" class="btn btn-success">Submit</button>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -147,16 +156,57 @@
 
 $(document).ready(function() {
 
-// get topping price
-	$(".activity").change(function(event) {
+// get base pizza price
+$(".base_pizza_price").change(function(event) {
 		var total = parseInt($('.prices').val());
-		console.log(total);
+		var pizzaPriceBase = parseInt($('#pizzaPriceBase').val());
 		var x = $(this).val();
 
 		if(x === '0'){
 		 $('.pizzaPrice').val(total);
 		 $('.pizzaPriceHidden').val(total);
-		}else{
+		 }else{
+		  var urlString = "api/v1/pizza/find/"+x;
+    $.ajax({
+      method: "GET",
+      url : urlString
+    })
+    .done(function(pizza){
+      total += parseFloat(pizza.pizzaPrice);
+
+      $('.pizzaPriceBase').val(total);
+      $('#pizzaPriceEdit').val(total);
+      $('#pizzaPriceValue').val(total);
+
+      if ( ($('.pizzaPriceBase').val()) && ($('.toppingPrice').val()) ) {
+
+        $('.pizzaPrice').val( parseFloat($('.pizzaPriceBase').val()) + parseFloat($('.toppingPrice').val()) );
+        $('.pizzaPriceHidden').val( parseFloat($('.pizzaPriceBase').val()) + parseFloat($('.toppingPrice').val()) );
+      }else{
+
+        $('.pizzaPrice').val(total);
+        $('.pizzaPriceHidden').val(total);
+      }
+    })
+    .fail(function(){
+      alert("Connection Error");
+    });
+		}
+	});
+
+// get topping price
+	$(".activity").change(function(event) {
+
+// testing multiselect start
+var total = parseFloat($('.pizzaPriceBase').val());
+var toppingPrice = 0;
+	$('#toppingId :selected').each(function(i, sel){
+
+    var x =  $(sel).val();
+    if(x === '0'){
+     $('.pizzaPrice').val(total);
+     $('.pizzaPriceHidden').val(total);
+		  } else{
 		  var urlString = "api/v1/toppings/find/"+x;
     $.ajax({
       method: "GET",
@@ -165,15 +215,49 @@ $(document).ready(function() {
     .done(function(topping){
     console.log(topping)
       total += parseFloat(topping.toppingPrice);
+      toppingPrice += parseFloat(topping.toppingPrice);
       $('.pizzaPrice').val(total);
       $('.pizzaPriceHidden').val(total);
+      $('#toppingPrice').val(toppingPrice);
       $('#pizzaPriceEdit').val(total);
       $('#pizzaPriceValue').val(total);
+
     })
     .fail(function(){
       alert("Connection Error");
     });
 		}
+
+});
+// testing multiselect end
+
+
+<!--		var total = parseInt($('.prices').val());-->
+<!--		var total = parseInt($('.pizzaPriceBase').val());-->
+<!--		console.log(total);-->
+<!--		var x = $(this).val();-->
+
+<!--		if(x === '0'){-->
+<!--		 $('.pizzaPrice').val(total);-->
+<!--		 $('.pizzaPriceHidden').val(total);-->
+<!--		}else{-->
+<!--		  var urlString = "api/v1/toppings/find/"+x;-->
+<!--    $.ajax({-->
+<!--      method: "GET",-->
+<!--      url : urlString-->
+<!--    })-->
+<!--    .done(function(topping){-->
+<!--    console.log(topping)-->
+<!--      total += parseFloat(topping.toppingPrice);-->
+<!--      $('.pizzaPrice').val(total);-->
+<!--      $('.pizzaPriceHidden').val(total);-->
+<!--      $('#pizzaPriceEdit').val(total);-->
+<!--      $('#pizzaPriceValue').val(total);-->
+<!--    })-->
+<!--    .fail(function(){-->
+<!--      alert("Connection Error");-->
+<!--    });-->
+<!--		}-->
 	});
 
 

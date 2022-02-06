@@ -41,6 +41,8 @@ public class OrderResource {
     @PostMapping("/save-pizza")
     public String savePizza(OrderDTO orderDTO) {
 
+        System.out.println(orderDTO);
+
         Pizza pizza = orderDTO.toEntity();
         orderHelper.getToppings(orderDTO, pizza);
         pizzaService.savePizza(pizza);

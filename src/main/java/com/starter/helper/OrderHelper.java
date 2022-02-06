@@ -14,7 +14,7 @@ public class OrderHelper {
     private final ToppingsService toppingsService;
 
     public void getToppings(OrderDTO orderDTO, Pizza pizza){
-        Toppings toppings = toppingsService.findById(orderDTO.getToppingId()).get();
+//        Toppings toppings = toppingsService.findById(orderDTO.getToppingId()).get();
 //        pizza.setToppings(toppings);
     }
 }
