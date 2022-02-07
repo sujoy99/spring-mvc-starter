@@ -19,42 +19,44 @@
     }
 
     .bottom_margin{
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+    }
+    body{
+      background: url("[[@{/}]]images/pizza3.jpg");
+    }
+    card-header{
+      background-color: aquamarine;
     }
   </style>
-
 </head>
 <body>
-
 <div class="container top_margin">
-  <span th:text="${msg}" ></span>
+
   <div class="row col-12 mb-3">
-    <div th:if="${ #lists.isEmpty(orders)}">
-      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addForm">
-        Add
-      </button>
-    </div>
-    <div th:if="${not #lists.isEmpty(orders)}">
-      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addForm">
-        Add More
-      </button>
-    </div>
-    <!--<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addForm">
-      Add
-    </button>-->
+  <div th:if="${ #lists.isEmpty(orders)}">
+    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addForm">
+      Start Order
+    </button>
   </div>
-
+  </div>
+    <div class="row col-12 mb-6">
+      <div th:if="${not #lists.isEmpty(orders)}">
+        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addForm">
+          Next Order
+        </button>
+      </div>
+    </div>
+<br>
   <div class="row">
-
-    <div class="col-6 bottom_margin" th:each="order: ${orders}">
-      <div class="card ">
-        <div class="card-header">
+    <div class="col-8 bottom_margin" th:each="order: ${orders}">
+      <div class="card " >
+        <div class="card-header"  style="background-color: aqua">
 
           <h4 class="d-inline">Pizza Name :</h4> <label th:text="${order.pizzaName}"></label>
           <b class="float-right" th:text="${order.orderStatus}"></b>
         </div>
         <div class="card-body">
-          <h4 class="d-inline">Pizza Price :</h4> <b th:text=" ${order.totalPrice} + &#2547;"></b>
+          <h4 class="d-inline">Pizza Price :</h4> <b th:text=" ${order.totalPrice} +&#2547;"></b>
 
           <input type="text" hidden class="form-control" id = "id" th:value="${order.orderId}" >
           <button type="button" class="btn btn-primary float-right edit"  data-toggle="modal" data-target="#editForm">
@@ -65,16 +67,13 @@
       </div>
     </div>
   </div>
-
-
 </div>
-
 <!--add pizza-->
-<div class="modal fade" id="addForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade"  id="addForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel">Add Pizza</h5>
+    <div class="modal-content"  style="background-color: lightcyan">
+      <div class="modal-header border-bottom-0" style="background-color: dodgerblue">
+        <h3 class="modal-title" id="exampleModalLabel">Order Pizza</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -84,7 +83,7 @@
 
           <!--          pizza dropdown-->
           <div class="form-group">
-            <label>Pizza</label>
+            <label><b>Pizza</b></label>
             <select class="form-control base_pizza_price" name="pizzaId" id="pizzaId" required>
               <option value="0">Choose option</option>
               <option th:each="pizza: ${pizzas}" th:value="${pizza.pizzaId}" th:text="${pizza.pizzaName}"></option>
@@ -93,7 +92,7 @@
 
 <!--          toppings dropdown-->
           <div class="form-group">
-            <label >Toppings</label>
+            <label ><b>Toppings</b></label>
             <select class="form-control activity toppingId" name="toppingsId" id="toppingId" required multiple>
               <option value="0">Choose option</option>
               <option th:each="topping: ${toppings}" th:value="${topping.toppingsId}"
@@ -103,7 +102,7 @@
 
           <!--          total price calculation-->
           <div class="form-group">
-            <label>Total Price :</label>
+            <label><b>Total Price :</b></label>
             <input type="text" hidden readonly class="form-control prices" id="prices" th:value="*{totalPrice}">
             <input type="text" hidden class="form-control pizzaPriceBase" id="pizzaPriceBase">
             <input type="text" hidden class="form-control toppingPrice" id="toppingPrice">
@@ -112,7 +111,7 @@
           </div>
         </div>
         <div class="modal-footer border-top-0 d-flex justify-content-center">
-          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="submit" class="btn btn-success">Place Order</button>
         </div>
       </form>
     </div>
@@ -123,9 +122,9 @@
 <div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel1">Edit Pizza</h5>
+    <div class="modal-content" style="background-color: lightcyan">
+      <div class="modal-header border-bottom-0" style="background-color: aqua ">
+        <h3 class="modal-title" id="exampleModalLabel1"><b>Edit Pizza</b></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -142,7 +141,7 @@
 
             <!--          pizza dropdown-->
             <div class="form-group">
-              <label>Pizza</label>
+              <label><b>Pizza</b></label>
               <select class="form-control base_pizza_price pizzaId" required disabled>
                 <option value="0">Choose option</option>
                 <option th:each="pizza: ${pizzas}" th:value="${pizza.pizzaId}" th:text="${pizza.pizzaName}"></option>
@@ -151,7 +150,7 @@
 
             <!--          toppings dropdown-->
             <div class="form-group">
-              <label>Toppings</label>
+              <label><b>Toppings</b></label>
               <select class="form-control activity toppingId" name="toppingsId" id="toppingIdValue" required multiple>
                 <option value="0">Choose option</option>
                 <option th:each="topping: ${toppings}" th:value="${topping.toppingsId}"
@@ -162,7 +161,7 @@
 
           <!--          total price calculation-->
           <div class="form-group">
-            <label>Total Price :</label>
+            <label><b>Total Price :</b></label>
             <input type="text" hidden readonly class="form-control prices"  th:value="*{totalPrice}">
             <input type="text" hidden class="form-control pizzaPriceBase" >
             <input type="text" hidden class="form-control toppingPrice" >
