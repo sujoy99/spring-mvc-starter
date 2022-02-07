@@ -85,7 +85,7 @@
           <!--          pizza dropdown-->
           <div class="form-group">
             <label>Pizza</label>
-            <select class="form-control base_pizza_price" name="pizzaId" id="pizzaId" required>
+            <select class="form-control base_pizza_price pizzaId" name="pizzaId" id="pizzaId" required>
               <option value="0">Choose option</option>
               <option th:each="pizza: ${pizzas}" th:value="${pizza.pizzaId}" th:text="${pizza.pizzaName}"></option>
             </select>
@@ -137,7 +137,7 @@
             <input type="text" hidden class="form-control" name="orderId" id="orderId" aria-describedby="emailHelp"
                    placeholder="Enter name">
 
-            <input type="text" hidden class="form-control" name="pizzaId" id="pizzaIdHidden" aria-describedby="emailHelp"
+            <input type="text" hidden class="form-control pizzaId" name="pizzaId" id="pizzaIdHidden" aria-describedby="emailHelp"
                    placeholder="Enter name">
 
             <!--          pizza dropdown-->
@@ -234,7 +234,7 @@ $(".base_pizza_price").change(function(event) {
 var total = parseFloat($('.pizzaPriceBase').val());
 var toppingPrice = 0;
 var toppingsId = [];
-var pizzaId = $('#pizzaId').val();
+var pizzaId = $('.pizzaId').val();
   $('.toppingId :selected').each(function(i, sel){
 
     var x =  $(sel).val();
@@ -248,6 +248,7 @@ var pizzaId = $('#pizzaId').val();
 
 
 });
+console.log("hi", toppingsId);
 var urlString = "api/v1/toppings/find";
 
 $.ajax({
