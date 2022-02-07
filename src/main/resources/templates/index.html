@@ -94,10 +94,10 @@
           <!--          total price calculation-->
           <div class="form-group">
             <label>Total Price :</label>
-            <input type="text" readonly class="form-control prices" id="prices" th:value="*{totalPrice}">
-            <input type="text" class="form-control pizzaPriceBase" id="pizzaPriceBase">
-            <input type="text" class="form-control toppingPrice" id="toppingPrice">
-            <input type="text" class="form-control pizzaPriceHidden" name="totalPrice" id="pizzaPriceHidden">
+            <input type="text" hidden readonly class="form-control prices" id="prices" th:value="*{totalPrice}">
+            <input type="text" hidden class="form-control pizzaPriceBase" id="pizzaPriceBase">
+            <input type="text" hidden class="form-control toppingPrice" id="toppingPrice">
+            <input type="text" hidden class="form-control pizzaPriceHidden" name="totalPrice" id="pizzaPriceHidden">
             <input type="text" readonly class="form-control pizzaPrice" id="pizzaPrice" th:value="*{totalPrice}">
           </div>
         </div>
@@ -124,10 +124,10 @@
         <div class="modal-body">
           <div class="form-group">
 
-            <input type="text" class="form-control" name="orderId" id="orderId" aria-describedby="emailHelp"
+            <input type="text" hidden class="form-control" name="orderId" id="orderId" aria-describedby="emailHelp"
                    placeholder="Enter name">
 
-            <input type="text" class="form-control" name="pizzaId" id="pizzaIdHidden" aria-describedby="emailHelp"
+            <input type="text" hidden class="form-control" name="pizzaId" id="pizzaIdHidden" aria-describedby="emailHelp"
                    placeholder="Enter name">
 
             <!--          pizza dropdown-->
@@ -153,26 +153,12 @@
           <!--          total price calculation-->
           <div class="form-group">
             <label>Total Price :</label>
-            <input type="text" readonly class="form-control prices"  th:value="*{totalPrice}">
-            <input type="text" class="form-control pizzaPriceBase" id="pizzaPriceBase">
-            <input type="text" class="form-control toppingPrice" id="toppingPrice">
-            <input type="text" class="form-control pizzaPriceHidden" name="totalPrice" id="pizzaPriceHidden">
-            <input type="text" readonly class="form-control pizzaPrice" id="pizzaPrice" th:value="*{totalPrice}">
+            <input type="text" hidden readonly class="form-control prices"  th:value="*{totalPrice}">
+            <input type="text" hidden class="form-control pizzaPriceBase" >
+            <input type="text" hidden class="form-control toppingPrice" >
+            <input type="text" hidden class="form-control pizzaPriceHidden" name="totalPrice" >
+            <input type="text" readonly class="form-control pizzaPrice"  th:value="*{totalPrice}">
           </div>
-          <!--          <div class="form-group">-->
-          <!--            <label>Toppings</label>-->
-          <!--            <select class="form-control activity" name="toppingId" id="toppingIdValue">-->
-          <!--              <option value="0">Choose option</option>-->
-          <!--              <option th:each="topping: ${toppings}" th:value="${topping.toppingsId}"-->
-          <!--                      th:text="${topping.toppingsName}"></option>-->
-          <!--            </select>-->
-          <!--          </div>-->
-          <!--          <div class="form-group">-->
-          <!--            <label>Total Price :</label>-->
-          <!--            <input type="text" hidden readonly class="form-control prices" th:value="*{pizzaPrice}">-->
-          <!--            <input type="text" hidden class="form-control " name="pizzaPrice" id="pizzaPriceEdit">-->
-          <!--            <input type="text" readonly class="form-control " id="pizzaPriceValue">-->
-          <!--          </div>-->
         </div>
         <div class="modal-footer border-top-0 d-flex justify-content-center">
           <button type="submit" class="btn btn-success">Submit</button>
