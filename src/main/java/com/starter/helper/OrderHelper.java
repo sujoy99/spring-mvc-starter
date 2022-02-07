@@ -33,4 +33,18 @@ public class OrderHelper {
         });
         order.setOrderDetails(orderDetails);
     }
+
+    public void updateOrderDetails(OrderDTO orderDTO, Order order) {
+        order.getOrderDetails().clear();
+        Pizza pizza = pizzaService.findById(orderDTO.getPizzaId()).get();
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        Arrays.asList(orderDTO.getToppingsId()).forEach(toppingsId -> {
+            Toppings toppings = toppingsService.findById(toppingsId).get();
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setPizza(pizza);
+            orderDetail.setToppings(toppings);
+            orderDetails.add(orderDetail);
+        });
+        order.getOrderDetails().addAll(orderDetails);
+    }
 }

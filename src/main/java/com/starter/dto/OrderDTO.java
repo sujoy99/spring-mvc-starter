@@ -24,4 +24,10 @@ public class OrderDTO {
         order.setTotalPrice(totalPrice);
         return order;
     }
+
+    public Order updateEntity(Order order) {
+        order.setOrderStatus(status);
+        order.setTotalPrice(totalPrice);
+        return order;
+    }
 }

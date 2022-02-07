@@ -57,14 +57,16 @@ public class OrderResource {
         return "redirect:/";
     }
 
-    /*
     @PostMapping("/edit-pizza")
     public String editPizza(OrderDTO orderDTO) {
 
-        Order order = orderDTO.toEntity();
-        orderHelper.getToppings(orderDTO, pizza);
-        pizzaService.savePizza(pizza);
+        System.out.println(orderDTO);
+
+        Order order = orderService.findById(orderDTO.getOrderId()).get();
+        orderDTO.updateEntity(order);
+        orderHelper.updateOrderDetails(orderDTO, order);
+        orderService.saveOrder(order);
 
         return "redirect:/";
-    }*/
+    }
 }
