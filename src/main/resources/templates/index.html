@@ -29,9 +29,19 @@
 <div class="container top_margin">
   <span th:text="${msg}" ></span>
   <div class="row col-12 mb-3">
-    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addForm">
+    <div th:if="${ #lists.isEmpty(orders)}">
+      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addForm">
+        Add
+      </button>
+    </div>
+    <div th:if="${not #lists.isEmpty(orders)}">
+      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addForm">
+        Add More
+      </button>
+    </div>
+    <!--<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addForm">
       Add
-    </button>
+    </button>-->
   </div>
 
   <div class="row">
