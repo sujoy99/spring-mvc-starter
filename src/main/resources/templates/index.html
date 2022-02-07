@@ -262,9 +262,11 @@ $.ajax({
     }
   )
 })
-.done(function(topping){
+.done(function(totalToppingPrice){
   console.log("hello");
-  console.log(topping)
+  console.log(totalToppingPrice);
+  $('.pizzaPrice').val(totalToppingPrice);
+  $('.pizzaPriceHidden').val(totalToppingPrice);
 })
 .fail(function(){
   alert("Connection Error");

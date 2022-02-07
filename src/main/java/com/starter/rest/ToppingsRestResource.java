@@ -63,8 +63,6 @@ public class ToppingsRestResource {
                 Toppings toppingsEntity = toppingsService.findById(id).get();
                 pizzaDecor = new ToppingsImpl(pizzaDecor, toppingsEntity);
             }
-
-
             return new ResponseEntity<Double>( pizzaDecor.getCost(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<Double>(HttpStatus.BAD_REQUEST);
