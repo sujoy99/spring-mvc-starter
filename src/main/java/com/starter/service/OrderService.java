@@ -10,5 +10,7 @@ public interface OrderService {
 
     List<Order> findAll();
 
+    Optional<Order> findById(Long orderId);
+
     void saveOrder(Order order);
 }

@@ -81,6 +81,7 @@
             </select>
           </div>
 
+<!--          toppings dropdown-->
           <div class="form-group">
             <label >Toppings</label>
             <select class="form-control activity" name="toppingsId" id="toppingId" required multiple>
@@ -89,6 +90,8 @@
                       th:text="${topping.toppingsName}"></option>
             </select>
           </div>
+
+          <!--          total price calculation-->
           <div class="form-group">
             <label>Total Price :</label>
             <input type="text" readonly class="form-control prices" id="prices" th:value="*{totalPrice}">
@@ -107,44 +110,74 @@
 </div>
 
 <!--edit pizza-->
-<!--<div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">-->
-<!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header border-bottom-0">-->
-<!--        <h5 class="modal-title" id="exampleModalLabel1">Edit Pizza</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--          <span aria-hidden="true">&times;</span>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <form method="post" action="#" th:action="@{/edit-pizza}" th:object="${orderDTO}">-->
-<!--        <div class="modal-body">-->
-<!--          <div class="form-group">-->
-<!--            <label >Pizza Name</label>-->
+<div class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title" id="exampleModalLabel1">Edit Pizza</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post" action="#" th:action="@{/edit-pizza}" th:object="${orderDTO}">
+        <div class="modal-body">
+          <div class="form-group">
 
-<!--            <input type="text" class="form-control"  name="orderId" id="orderId"  aria-describedby="emailHelp" placeholder="Enter name">-->
-<!--            <input type="text" readonly class="form-control" name="pizzaName" id="pizzaNameValue"  aria-describedby="emailHelp" placeholder="Enter name">-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <label >Toppings</label>-->
-<!--            <select class="form-control activity" name="toppingId" id="toppingIdValue" >-->
-<!--              <option value="0">Choose option</option>-->
-<!--              <option th:each="topping: ${toppings}"  th:value="${topping.toppingsId}"   th:text="${topping.toppingsName}"></option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <label >Total Price :</label>-->
-<!--            <input type="text" hidden readonly class="form-control prices"  th:value="*{pizzaPrice}">-->
-<!--            <input type="text" hidden class="form-control " name="pizzaPrice" id="pizzaPriceEdit" >-->
-<!--            <input type="text" readonly class="form-control " id="pizzaPriceValue" >-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="modal-footer border-top-0 d-flex justify-content-center">-->
-<!--          <button type="submit" class="btn btn-success">Submit</button>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+            <input type="text" class="form-control" name="orderId" id="orderId" aria-describedby="emailHelp"
+                   placeholder="Enter name">
+
+            <!--          pizza dropdown-->
+            <div class="form-group">
+              <label>Pizza</label>
+              <select class="form-control base_pizza_price pizzaId" name="pizzaId" required disabled>
+                <option value="0">Choose option</option>
+                <option th:each="pizza: ${pizzas}" th:value="${pizza.pizzaId}" th:text="${pizza.pizzaName}"></option>
+              </select>
+            </div>
+
+            <!--          toppings dropdown-->
+            <div class="form-group">
+              <label>Toppings</label>
+              <select class="form-control activity" name="toppingsId" id="toppingIdValue" required multiple>
+                <option value="0">Choose option</option>
+                <option th:each="topping: ${toppings}" th:value="${topping.toppingsId}"
+                        th:text="${topping.toppingsName}"></option>
+              </select>
+            </div>
+          </div>
+
+          <!--          total price calculation-->
+          <div class="form-group">
+            <label>Total Price :</label>
+            <input type="text" readonly class="form-control prices" id="prices" th:value="*{totalPrice}">
+            <input type="text" class="form-control pizzaPriceBase" id="pizzaPriceBase">
+            <input type="text" class="form-control toppingPrice" id="toppingPrice">
+            <input type="text" class="form-control pizzaPriceHidden" name="totalPrice" id="pizzaPriceHidden">
+            <input type="text" readonly class="form-control pizzaPrice" id="pizzaPrice" th:value="*{totalPrice}">
+          </div>
+          <!--          <div class="form-group">-->
+          <!--            <label>Toppings</label>-->
+          <!--            <select class="form-control activity" name="toppingId" id="toppingIdValue">-->
+          <!--              <option value="0">Choose option</option>-->
+          <!--              <option th:each="topping: ${toppings}" th:value="${topping.toppingsId}"-->
+          <!--                      th:text="${topping.toppingsName}"></option>-->
+          <!--            </select>-->
+          <!--          </div>-->
+          <!--          <div class="form-group">-->
+          <!--            <label>Total Price :</label>-->
+          <!--            <input type="text" hidden readonly class="form-control prices" th:value="*{pizzaPrice}">-->
+          <!--            <input type="text" hidden class="form-control " name="pizzaPrice" id="pizzaPriceEdit">-->
+          <!--            <input type="text" readonly class="form-control " id="pizzaPriceValue">-->
+          <!--          </div>-->
+        </div>
+        <div class="modal-footer border-top-0 d-flex justify-content-center">
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -264,16 +297,37 @@ var toppingPrice = 0;
 	// edit pizza
 		$(".edit").click(function(event) {
 		var id = $(this).parent().find('#id').val();
+		console.log("id:", id);
 
-		 var urlString = "api/v1/pizza/find/"+id;
+		 var urlString = "api/v1/order/find/"+id;
     $.ajax({
       method: "GET",
       url : urlString
     })
-    .done(function(pizza){
-      $('#pizzaId').val(pizza.pizzaId);
-      $('#pizzaNameValue').val(pizza.pizzaName);
-      $('#toppingIdValue').val(pizza.toppings.toppingsId);
+    .done(function(order){
+    console.log("orderId",order);
+      $('#orderId').val(order.orderId);
+      console.log("pizzaId", order.orderDetails[0].pizza.pizzaId)
+      $('.pizzaId').val(order.orderDetails[0].pizza.pizzaId);
+<!--      $('#pizzaNameValue').val(pizza.pizzaName);-->
+      const toppingsId = [];
+      let toppingsPriceTotal = 0.0;
+      console.log("orderDetail", order.orderDetails);
+      for (let i = 0; i < order.orderDetails.length; i++) {
+        console.log("hi");
+        console.log("try",order.orderDetails[i].toppings.toppingsId);
+        toppingsId.push(order.orderDetails[i].toppings.toppingsId);
+        toppingsPriceTotal += order.orderDetails[i].toppings.toppingPrice;
+      }
+      console.log("toppingsId", toppingsId)
+      $('#toppingIdValue').val(toppingsId);
+
+      $('.pizzaPriceHidden').val(order.totalPrice);
+      $('.pizzaPrice').val(order.totalPrice);
+
+      $('.pizzaPriceBase').val(order.orderDetails[0].pizza.pizzaPrice);
+      $('.toppingPrice').val(toppingsPriceTotal);
+
       $('#pizzaPriceValue').val(pizza.pizzaPrice);
       $('#pizzaPriceEdit').val(total);
     })
