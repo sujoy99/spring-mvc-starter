@@ -1,6 +1,5 @@
 package com.starter.entity;
 
-import com.starter.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

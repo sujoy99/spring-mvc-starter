@@ -186,19 +186,20 @@
 
 <script type="text/javascript">
 
+
 $(document).ready(function() {
 
 // get base pizza price
 $(".base_pizza_price").change(function(event) {
-		var total = parseInt($('.prices').val());
-		var pizzaPriceBase = parseInt($('#pizzaPriceBase').val());
-		var x = $(this).val();
+    var total = parseInt($('.prices').val());
+    var pizzaPriceBase = parseInt($('#pizzaPriceBase').val());
+    var x = $(this).val();
 
-		if(x === '0'){
-		 $('.pizzaPrice').val(total);
-		 $('.pizzaPriceHidden').val(total);
-		 }else{
-		  var urlString = "api/v1/pizza/find/"+x;
+    if(x === '0'){
+     $('.pizzaPrice').val(total);
+     $('.pizzaPriceHidden').val(total);
+     }else{
+      var urlString = "api/v1/pizza/find/"+x;
     $.ajax({
       method: "GET",
       url : urlString
@@ -223,55 +224,62 @@ $(".base_pizza_price").change(function(event) {
     .fail(function(){
       alert("Connection Error");
     });
-		}
-	});
+    }
+  });
 
 // get topping price
-	$(".activity").change(function(event) {
+  $(".activity").change(function(event) {
 
 // testing multiselect start
 var total = parseFloat($('.pizzaPriceBase').val());
 var toppingPrice = 0;
-	$('.toppingId :selected').each(function(i, sel){
+var toppingsId = [];
+var pizzaId = $('#pizzaId').val();
+  $('.toppingId :selected').each(function(i, sel){
 
     var x =  $(sel).val();
     if(x === '0'){
      $('.pizzaPrice').val(total);
      $('.pizzaPriceHidden').val(total);
-		  } else{
-		  var urlString = "api/v1/toppings/find/"+x;
-    $.ajax({
-      method: "GET",
-      url : urlString
-    })
-    .done(function(topping){
-    console.log(topping)
-      total += parseFloat(topping.toppingPrice);
-      toppingPrice += parseFloat(topping.toppingPrice);
-      $('.pizzaPrice').val(total);
-      $('.pizzaPriceHidden').val(total);
-      $('#toppingPrice').val(toppingPrice);
-      $('#pizzaPriceEdit').val(total);
-      $('#pizzaPriceValue').val(total);
+      } else{
+      toppingsId.push(x);
+    }
 
-    })
-    .fail(function(){
-      alert("Connection Error");
-    });
-		}
 
+
+});
+var urlString = "api/v1/toppings/find";
+
+$.ajax({
+  method: "POST",
+  url : urlString,
+  dataType: 'json',
+  contentType: 'application/json',
+  data:  JSON.stringify(
+    {
+          pizzaId:pizzaId,
+          toppingsId:toppingsId
+    }
+  )
+})
+.done(function(topping){
+  console.log("hello");
+  console.log(topping)
+})
+.fail(function(){
+  alert("Connection Error");
 });
 // testing multiselect end
 
-	});
+  });
 
 
-	// edit pizza
-		$(".edit").click(function(event) {
-		var id = $(this).parent().find('#id').val();
-		console.log("id:", id);
+  // edit pizza
+    $(".edit").click(function(event) {
+    var id = $(this).parent().find('#id').val();
+    console.log("id:", id);
 
-		 var urlString = "api/v1/order/find/"+id;
+     var urlString = "api/v1/order/find/"+id;
     $.ajax({
       method: "GET",
       url : urlString
@@ -298,8 +306,9 @@ var toppingPrice = 0;
     .fail(function(){
       alert("Connection Error");
     });
-	});
+  });
 });
+
 </script>
 </body>
 </html>
